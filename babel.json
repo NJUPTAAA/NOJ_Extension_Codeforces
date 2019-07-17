@@ -1,11 +1,11 @@
 {
-    "name":"Template",
-    "code":"template",
-    "icon":"resources/template@2x.png",
+    "name":"Codeforces",
+    "code":"codeforces",
+    "icon":"resources/codeforces@2x.png",
     "type":"virtual-judge",
-    "description": "Template of Interface for NOJ",
+    "description": "Codeforces interface for NOJ",
     "license": "MIT",
-    "repository":"https://github.com/NJUPTAAA/NOJ_Extensions_Template",
+    "repository":"https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
     "version":"0.0.1",
     "website":"https://acm.njupt.edu.cn/",
     "provider":{

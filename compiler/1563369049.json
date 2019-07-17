@@ -1,0 +1,199 @@
+{
+    "modifications":[{
+        "code":"43GNU GCC C11 5.1.0",
+        "compability":"c",
+        "language":"c",
+        "icon":"devicon-c-plain",
+        "display":"GNU GCC C11 5.1.0",
+        "method":"add"
+    },{
+        "code":"52Clang++17 Diagnostics",
+        "compability":"c",
+        "language":"c",
+        "icon":"devicon-c-plain",
+        "display":"Clang++17 Diagnostics",
+        "method":"add"
+    },{
+        "code":"42GNU G++11 5.1.0",
+        "compability":"c",
+        "language":"cpp",
+        "icon":"devicon-cplusplus-plain",
+        "display":"GNU G++11 5.1.0",
+        "method":"add"
+    },{
+        "code":"50GNU G++14 6.4.0",
+        "compability":"c",
+        "language":"cpp",
+        "icon":"devicon-cplusplus-plain",
+        "display":"GNU G++14 6.4.0",
+        "method":"add"
+    },{
+        "code":"54GNU G++17 7.3.0",
+        "compability":"c",
+        "language":"cpp",
+        "icon":"devicon-cplusplus-plain",
+        "display":"GNU G++17 7.3.0",
+        "method":"add"
+    },{
+        "code":"02Microsoft Visual C++ 2010",
+        "compability":"c",
+        "language":"cpp",
+        "icon":"devicon-cplusplus-plain",
+        "display":"Microsoft Visual C++ 2010",
+        "method":"add"
+    },{
+        "code":"59Microsoft Visual C++ 2017",
+        "compability":"c",
+        "language":"cpp",
+        "icon":"devicon-cplusplus-plain",
+        "display":"Microsoft Visual C++ 2017",
+        "method":"add"
+    },{
+        "code":"09C# Mono 5.18",
+        "compability":"chsarp",
+        "language":"csharp",
+        "icon":"devicon-csharp-plain",
+        "display":"C# Mono 5.18",
+        "method":"add"
+    },{
+        "code":"28D DMD32 v2.083.1",
+        "compability":"d",
+        "language":"d",
+        "icon":"devicon-devicon-plain",
+        "display":"D DMD32 v2.083.1",
+        "method":"add"
+    },{
+        "code":"32Go 1.11.4",
+        "compability":"go",
+        "language":"go",
+        "icon":"devicon-go-plain",
+        "display":"Go 1.11.4",
+        "method":"add"
+    },{
+        "code":"12Haskell GHC 7.8.3 (2014.2.0.0)",
+        "compability":"haskell",
+        "language":"haskell",
+        "icon":"devicon-devicon-plain",
+        "display":"Haskell GHC 7.8.3 (2014.2.0.0)",
+        "method":"add"
+    },{
+        "code":"36Java 1.8.0_162",
+        "compability":"java",
+        "language":"java",
+        "icon":"devicon-java-plain",
+        "display":"Java 1.8.0_162",
+        "method":"add"
+    },{
+        "code":"48Kotlin 1.3.10",
+        "compability":"java",
+        "language":"kotlin",
+        "icon":"devicon-devicon-plain",
+        "display":"Kotlin 1.3.10",
+        "method":"add"
+    },{
+        "code":"19OCaml 4.02.1",
+        "compability":"caml",
+        "language":"caml",
+        "icon":"devicon-devicon-plain",
+        "display":"OCaml 4.02.1",
+        "method":"add"
+    },{
+        "code":"03Delphi 7",
+        "compability":"pascal",
+        "language":"delphi",
+        "icon":"devicon-devicon-plain",
+        "display":"Delphi 7",
+        "method":"add"
+    },{
+        "code":"04Free Pascal 3.0.2",
+        "compability":"pascal",
+        "language":"pascal",
+        "icon":"devicon-devicon-plain",
+        "display":"Free Pascal 3.0.2",
+        "method":"add"
+    },{
+        "code":"51PascalABC.NET 3.4.2",
+        "compability":"pascal",
+        "language":"pascal",
+        "icon":"devicon-devicon-plain",
+        "display":"PascalABC.NET 3.4.2",
+        "method":"add"
+    },{
+        "code":"13Perl 5.20.1",
+        "compability":"perl",
+        "language":"perl",
+        "icon":"devicon-devicon-plain",
+        "display":"Perl 5.20.1",
+        "method":"add"
+    },{
+        "code":"06PHP 7.2.13",
+        "compability":"php",
+        "language":"php",
+        "icon":"devicon-php-plain",
+        "display":"PHP 7.2.13",
+        "method":"add"
+    },{
+        "code":"07Python 2.7.15",
+        "compability":"python",
+        "language":"python",
+        "icon":"devicon-python-plain",
+        "display":"Python 2.7.15",
+        "method":"add"
+    },{
+        "code":"31Python 3.7.2",
+        "compability":"python",
+        "language":"python",
+        "icon":"devicon-python-plain",
+        "display":"Python 3.7.2",
+        "method":"add"
+    },{
+        "code":"40PyPy 2.7 (6.0.0)",
+        "compability":"python",
+        "language":"python",
+        "icon":"devicon-python-plain",
+        "display":"PyPy 2.7 (6.0.0)",
+        "method":"add"
+    },{
+        "code":"41PyPy 3.5 (6.0.0)",
+        "compability":"python",
+        "language":"python",
+        "icon":"devicon-python-plain",
+        "display":"PyPy 3.5 (6.0.0)",
+        "method":"add"
+    },{
+        "code":"08Ruby 2.0.0p645",
+        "compability":"ruby",
+        "language":"ruby",
+        "icon":"devicon-ruby-plain",
+        "display":"Ruby 2.0.0p645",
+        "method":"add"
+    },{
+        "code":"49Rust 1.31.1",
+        "compability":"rust",
+        "language":"rust",
+        "icon":"devicon-devicon-plain",
+        "display":"Rust 1.31.1",
+        "method":"add"
+    },{
+        "code":"20Scala 2.12.8",
+        "compability":"scala",
+        "language":"scala",
+        "icon":"devicon-devicon-plain",
+        "display":"Scala 2.12.8",
+        "method":"add"
+    },{
+        "code":"34JavaScript V8 4.8.0",
+        "compability":"javascript",
+        "language":"javascript",
+        "icon":"devicon-javascript-plain",
+        "display":"JavaScript V8 4.8.0",
+        "method":"add"
+    },{
+        "code":"55Node.js 9.4.0",
+        "compability":"javascript",
+        "language":"javascript",
+        "icon":"devicon-nodejs-plain",
+        "display":"Node.js 9.4.0",
+        "method":"add"
+    }]
+}

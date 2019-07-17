@@ -1,12 +1,12 @@
 <?php
-namespace App\Babel\Extension\template;//The 'template' should be replaced by the real oj code.
+namespace App\Babel\Extension\codeforces;
 
 use App\Babel\Install\InstallerBase;
 use Exception;
 
 class Installer extends InstallerBase
 {
-    public $ocode="template";
+    public $ocode="codeforces";
 
     public function install()
     {
