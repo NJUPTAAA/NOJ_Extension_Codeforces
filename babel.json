@@ -1,0 +1,20 @@
+{
+    "name":"Template",
+    "code":"template",
+    "icon":"resources/template@2x.png",
+    "type":"virtual-judge",
+    "description": "Template of Interface for NOJ",
+    "license": "MIT",
+    "repository":"https://github.com/NJUPTAAA/NOJ_Extensions_Template",
+    "version":"0.0.1",
+    "website":"https://acm.njupt.edu.cn/",
+    "provider":{
+        "judger":"Judger",
+        "crawler":"Crawler",
+        "submitter":"Submitter",
+        "installer":"Installer"
+    },
+    "require":{
+        "NOJ":"^0.3.0"
+    }
+}
