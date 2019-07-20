@@ -52,7 +52,7 @@ class Crawler extends CrawlerBase
     public function extractCodeForces($cid, $num, $url, $default_desc="")
     {
         $pid=$cid.$num;
-        $content=$this->get_url($url);
+        $content=$this->getUrl($url);
         $content_type=get_headers($url, 1)["Content-Type"];
         if (stripos($content, "<title>Codeforces</title>")===false) {
             if (stripos($content, "<title>Attachments")!==false) {
@@ -160,62 +160,60 @@ class Crawler extends CrawlerBase
             fclose($fp);
         }
         $result=json_decode($response, true);
-        if ($result["status"]=="OK") {
-            $now=time()-$start;
-            $f=fopen(__DIR__."/codeforces_status.log", "w") or die("Unable to open file!");
-            fwrite($f, "CodeForces API Success at {$now}".PHP_EOL);
-            for ($i=count($result['result']['problems'])-1; $i>=0; $i--) {
-                foreach ($this->pro as $x => $y) {
-                    $this->pro[$x]='';
-                }
+        $updmsg = $incremental ? 'Updating' : 'Crawling';
+        $donemsg = $incremental ? 'Updated' : 'Crawled';
+        if ($result["status"]!="OK") {
+            $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Failed fetching problem set.</>\n");
+            return;
+        }
+        for ($i=count($result['result']['problems'])-1; $i>=0; $i--) {
+            foreach ($this->pro as $x => $y) {
+                $this->pro[$x]='';
+            }
 
-                if ($con!='all') {
-                    if ($con!=$result['result']['problems'][$i]['contestId']) {
-                        continue;
-                    }
-                }
-
-                if ($incremental && !empty($problemModel->basic($problemModel->pid('CF' . $result['result']['problems'][$i]['contestId'])))) {
+            if ($con!='all') {
+                if ($con!=$result['result']['problems'][$i]['contestId']) {
                     continue;
                 }
-
-                $this->pro['origin']="http://codeforces.com/contest/{$result['result']['problems'][$i]['contestId']}/problem/{$result['result']['problems'][$i]['index']}";
-                $this->pro['title']=str_replace('"', "'", $result['result']['problems'][$i]['name']);
-                $this->pro['solved_count']=$result['result']['problemStatistics'][$i]['solvedCount'];
-                $this->pro['pcode']="CF".$result['result']['problems'][$i]['contestId'].$result['result']['problems'][$i]['index'];
-                $this->pro['index_id']=$result['result']['problems'][$i]['index'];
-                $this->pro['contest_id']=$result['result']['problems'][$i]['contestId'];
-                $this->pro['OJ']=$this->oid;
-                $this->pro['tot_score']=1;
-                $this->pro['partial']=0;
-                $this->pro['markdown']=0;
-
-                $now=time()-$start;
-                fwrite($f, "{$this->pro['pcode']} start at {$now}".PHP_EOL);
-
-                $this->extractCodeForces($this->pro['contest_id'], $this->pro['index_id'], $this->pro['origin']);
-
-                $pid=$problemModel->pid($this->pro['pcode']);
-
-                if ($pid) {
-                    $problemModel->clearTags($pid);
-                    $new_pid=$this->updateProblem($this->oid);
-                } else {
-                    $new_pid=$this->insertProblem($this->oid);
-                }
-
-                for ($j=0; $j<count($result['result']['problems'][$i]['tags']); $j++) {
-                    $problemModel->addTags($new_pid, $result['result']['problems'][$i]['tags'][$j]);
-                }
-
-                // Why not foreach ?????? I don't know...
-
-                $now=time()-$start;
-                fwrite($f, "{$this->pro['pcode']} end at {$now}".PHP_EOL);
             }
-            $now=time()-$start;
-            fwrite($f, "Updata All Problems end at {$now}".PHP_EOL);
-            fclose($f);
+
+            $pcode = "CF".$result['result']['problems'][$i]['contestId'].$result['result']['problems'][$i]['index'];
+
+            if ($incremental && !empty($problemModel->basic($problemModel->pid($pcode)))) {
+                continue;
+            }
+
+            $this->line("<fg=yellow>{$updmsg}:   </>$pcode");
+
+            $this->pro['origin']="http://codeforces.com/contest/{$result['result']['problems'][$i]['contestId']}/problem/{$result['result']['problems'][$i]['index']}";
+            $this->pro['title']=str_replace('"', "'", $result['result']['problems'][$i]['name']);
+            $this->pro['solved_count']=$result['result']['problemStatistics'][$i]['solvedCount'];
+            $this->pro['pcode']=$pcode;
+            $this->pro['index_id']=$result['result']['problems'][$i]['index'];
+            $this->pro['contest_id']=$result['result']['problems'][$i]['contestId'];
+            $this->pro['OJ']=$this->oid;
+            $this->pro['tot_score']=1;
+            $this->pro['partial']=0;
+            $this->pro['markdown']=0;
+
+            $this->extractCodeForces($this->pro['contest_id'], $this->pro['index_id'], $this->pro['origin']);
+
+            $pid=$problemModel->pid($this->pro['pcode']);
+
+            if ($pid) {
+                $problemModel->clearTags($pid);
+                $new_pid=$this->updateProblem($this->oid);
+            } else {
+                $new_pid=$this->insertProblem($this->oid);
+            }
+
+            for ($j=0; $j<count($result['result']['problems'][$i]['tags']); $j++) {
+                $problemModel->addTags($new_pid, $result['result']['problems'][$i]['tags'][$j]);
+            }
+
+            // Why not foreach ?????? I don't know...
+
+            $this->line("<fg=green>$donemsg:    </>$pcode");
         }
     }
 }
