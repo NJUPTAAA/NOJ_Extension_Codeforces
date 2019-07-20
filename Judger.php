@@ -50,11 +50,25 @@ class Judger extends Curl
                 if ($sub['verdict']=='Compile Error') {
                     $handle=$this->judgerModel->detail($row['jid'])['handle'];
                     if (!isset($this->csrf[$handle])) {
-                        $res=$curl->grab_page('http://codeforces.com', 'codeforces', [], $handle);
+                        $res=$curl->grab_page([
+                            'site' => 'http://codeforces.com',
+                            'oj' => 'codeforces',
+                            'handle' => $handle,
+                        ]);
                         preg_match('/<meta name="X-Csrf-Token" content="([0-9a-z]*)"/', $res, $match);
                         $this->csrf[$handle]=$match[1];
                     }
-                    $res=$curl->post_data('http://codeforces.com/data/judgeProtocol', ['submissionId'=>$row['remote_id'], 'csrf_token'=>$this->csrf[$handle]], 'codeforces', true, false, false, false, [], $handle);
+                    $res=$curl->post_data([
+                        'site' => 'http://codeforces.com/data/judgeProtocol',
+                        'data' => [
+                            'submissionId'=>$row['remote_id'],
+                            'csrf_token'=>$this->csrf[$handle],
+                        ],
+                        'oj' => 'codeforces',
+                        'ret' => true,
+                        'returnHeader' => false,
+                        'handle' => $handle,
+                    ]);
                     $sub['compile_info']=json_decode($res);
                 }
                 $sub["score"]=$sub['verdict']=="Accepted" ? 1 : 0;

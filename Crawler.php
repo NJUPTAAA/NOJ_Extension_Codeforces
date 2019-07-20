@@ -19,7 +19,7 @@ class Crawler extends CrawlerBase
      *
      * @return Response
      */
-    public function __construct($conf)
+    public function start($conf)
     {
         $action=isset($conf["action"])?$conf["action"]:'crawl_problem';
         $con=isset($conf["con"])?$conf["con"]:'all';
@@ -195,9 +195,9 @@ class Crawler extends CrawlerBase
 
                 if ($pid) {
                     $problemModel->clearTags($pid);
-                    $new_pid=$this->update_problem($this->oid);
+                    $new_pid=$this->updateProblem($this->oid);
                 } else {
-                    $new_pid=$this->insert_problem($this->oid);
+                    $new_pid=$this->insertProblem($this->oid);
                 }
 
                 for ($j=0; $j<count($result['result']['problems'][$i]['tags']); $j++) {

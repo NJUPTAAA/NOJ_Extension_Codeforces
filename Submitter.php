@@ -4,6 +4,7 @@ namespace App\Babel\Extension\codeforces;
 use App\Babel\Submit\Curl;
 use App\Models\CompilerModel;
 use App\Models\JudgerModel;
+use App\Models\OJModel;
 use App\Models\SubmissionModel;
 use Illuminate\Support\Facades\Validator;
 use Requests;
@@ -30,9 +31,17 @@ class Submitter extends Curl
 
     private function _login()
     {
-        $response=$this->grab_page('http://codeforces.com', 'codeforces', [], $this->selectedJudger["handle"]);
+        $response=$this->grab_page([
+            'site' => 'http://codeforces.com',
+            'oj' => 'codeforces',
+            'handle' => $this->selectedJudger["handle"],
+        ]);
         if (!(strpos($response, 'Logout')!==false)) {
-            $response=$this->grab_page('http://codeforces.com/enter', 'codeforces', [], $this->selectedJudger["handle"]);
+            $response=$this->grab_page([
+                'site' => 'http://codeforces.com/enter',
+                'oj' => 'codeforces',
+                'handle' => $this->selectedJudger["handle"],
+            ]);
 
             $exploded=explode("name='csrf_token' value='", $response);
             $token=explode("'/>", $exploded[2])[0];
@@ -46,7 +55,12 @@ class Submitter extends Curl
                 'password' => $this->selectedJudger["password"],
                 'remember' => true,
             ];
-            $this->login('http://codeforces.com/enter', http_build_query($params), 'codeforces', false, $this->selectedJudger["handle"]);
+            $this->login([
+                'url' => 'http://codeforces.com/enter',
+                'data' => http_build_query($params),
+                'oj' => 'codeforces',
+                'handle' => $this->selectedJudger["handle"],
+            ]);
         }
     }
 
@@ -70,7 +84,11 @@ class Submitter extends Curl
         $source=($space.chr(10).$this->post_data["solution"]);
 
 
-        $response=$this->grab_page("codeforces.com/contest/{$this->post_data['cid']}/submit", "codeforces", [], $this->selectedJudger["handle"]);
+        $response=$this->grab_page([
+            'site' => "codeforces.com/contest/{$this->post_data['cid']}/submit",
+            'oj' => "codeforces",
+            'handle' => $this->selectedJudger["handle"],
+        ]);
 
         $exploded=explode("name='csrf_token' value='", $response);
         $token=explode("'/>", $exploded[2])[0];
@@ -86,7 +104,14 @@ class Submitter extends Curl
             'tabSize' => 4,
             'sourceFile' => '',
         ];
-        $response=$this->post_data("codeforces.com/contest/{$this->post_data['cid']}/submit?csrf_token=".$token, http_build_query($params), "codeforces", true, true, true, false, [], $this->selectedJudger["handle"]);
+        $response=$this->post_data([
+            'site' => "codeforces.com/contest/{$this->post_data['cid']}/submit?csrf_token=".$token,
+            'data' => http_build_query($params),
+            'oj' => "codeforces",
+            'ret' => true,
+            'returnHeader' => true,
+            'handle' => $this->selectedJudger["handle"],
+        ]);
         $this->sub["jid"]=$this->selectedJudger["jid"];
         if (strpos($response, 'alert("Source code hasn\'t submitted because of warning, please read it.");')!==false) {
             $this->sub['verdict']='Compile Error';
