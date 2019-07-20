@@ -33,7 +33,7 @@ class Crawler extends CrawlerBase
         if ($action=='judge_level') {
             $this->judge_level();
         } else {
-            $this->crawl($con);
+            $this->crawl($con, $cached, $action == 'update_problem');
         }
     }
 
@@ -141,7 +141,7 @@ class Crawler extends CrawlerBase
         }
     }
 
-    public function crawl($con)
+    public function crawl($con, $cached, $incremental)
     {
         $problemModel=new ProblemModel();
         $start=time();
@@ -173,6 +173,10 @@ class Crawler extends CrawlerBase
                     if ($con!=$result['result']['problems'][$i]['contestId']) {
                         continue;
                     }
+                }
+
+                if ($incremental && !empty($problemModel->basic($problemModel->pid('CF' . $result['result']['problems'][$i]['contestId'])))) {
+                    continue;
                 }
 
                 $this->pro['origin']="http://codeforces.com/contest/{$result['result']['problems'][$i]['contestId']}/problem/{$result['result']['problems'][$i]['index']}";
