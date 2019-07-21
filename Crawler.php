@@ -55,6 +55,10 @@ class Crawler extends CrawlerBase
         $content=$this->getUrl($url);
         $content_type=get_headers($url, 1)["Content-Type"];
         if (stripos($content, "<title>Codeforces</title>")===false) {
+            if (strpos($content, 'Statement is not available on English language' !== false)) {
+                $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Statement is not available on English.</>\n");
+                return false;
+            }
             if (stripos($content, "<title>Attachments")!==false) {
                 $this->pro["description"].=$default_desc;
             } else {
@@ -137,8 +141,10 @@ class Crawler extends CrawlerBase
                 }
             }
         } else {
+            $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Problem not found.</>\n");
             return false;
         }
+        return true;
     }
 
     public function crawl($con, $cached, $incremental)
@@ -196,7 +202,9 @@ class Crawler extends CrawlerBase
             $this->pro['partial']=0;
             $this->pro['markdown']=0;
 
-            $this->extractCodeForces($this->pro['contest_id'], $this->pro['index_id'], $this->pro['origin']);
+            if (!$this->extractCodeForces($this->pro['contest_id'], $this->pro['index_id'], $this->pro['origin'])) {
+                continue;
+            }
 
             $pid=$problemModel->pid($this->pro['pcode']);
 
