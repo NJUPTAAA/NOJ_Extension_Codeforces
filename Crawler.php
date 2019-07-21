@@ -196,8 +196,13 @@ class Crawler extends CrawlerBase
             $this->pro['partial']=0;
             $this->pro['markdown']=0;
 
-            $this->extractCodeForces($this->pro['contest_id'], $this->pro['index_id'], $this->pro['origin']);
-
+            try {
+                $this->extractCodeForces($this->pro['contest_id'], $this->pro['index_id'], $this->pro['origin']);
+            }catch(ErrorException $e){
+                $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Failed fetching $pcode.</>\n");
+                continue;
+            }
+            
             $pid=$problemModel->pid($this->pro['pcode']);
 
             if ($pid) {
