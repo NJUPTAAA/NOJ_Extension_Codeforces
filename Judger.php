@@ -4,6 +4,7 @@ namespace App\Babel\Extension\codeforces;
 use App\Babel\Submit\Curl;
 use App\Models\SubmissionModel;
 use App\Models\JudgerModel;
+use App\Models\OJModel;
 use Requests;
 use Exception;
 use Log;
@@ -21,19 +22,36 @@ class Judger extends Curl
         "PRESENTATION_ERROR"=>"Presentation Error",
         "IDLENESS_LIMIT_EXCEEDED"=>"Idleness Limit Exceed"
     ];
-    private $list;
+    private $list=[];
     private $csrf=[];
+    private $handles=[];
 
     public function __construct()
     {
         $this->submissionModel=new SubmissionModel();
         $this->judgerModel=new JudgerModel();
-        $this->list=$this->get_last_codeforces($this->submissionModel->countEarliestWaitingSubmission(2)+100);
+        $this->oid=OJModel::oid('codeforces');
+
+        if(is_null($this->oid)) {
+            throw new Exception("Online Judge Not Found");
+        }
     }
 
     public function judge($row)
     {
         $cf=[];
+        if (!isset($handles[$row['jid']])) {
+            $handle = $this->judgerModel->detail($row['jid'])['handle'];
+            $handles[$row['jid']] = $handle;
+            $res=$this->grab_page([
+                'site' => 'http://codeforces.com',
+                'oj' => 'codeforces',
+                'handle' => $handle,
+            ]);
+            preg_match('/<meta name="X-Csrf-Token" content="([0-9a-z]*)"/', $res, $match);
+            $this->csrf[$row['jid']] = $match[1];
+            $this->list = array_merge($this->list, $this->get_last_codeforces($this->submissionModel->countEarliestWaitingSubmission($this->oid) + 5, $handle));
+        }
         foreach ($this->list as $c) {
             if ($c[3]==$row["remote_id"]) {
                 $cf=$c;
@@ -48,26 +66,16 @@ class Judger extends Curl
                 $sub=[];
                 $sub['verdict']=$this->verdict[$cf[2]];
                 if ($sub['verdict']=='Compile Error') {
-                    $handle=$this->judgerModel->detail($row['jid'])['handle'];
-                    if (!isset($this->csrf[$handle])) {
-                        $res=$curl->grab_page([
-                            'site' => 'http://codeforces.com',
-                            'oj' => 'codeforces',
-                            'handle' => $handle,
-                        ]);
-                        preg_match('/<meta name="X-Csrf-Token" content="([0-9a-z]*)"/', $res, $match);
-                        $this->csrf[$handle]=$match[1];
-                    }
-                    $res=$curl->post_data([
+                    $res=$this->post_data([
                         'site' => 'http://codeforces.com/data/judgeProtocol',
                         'data' => [
                             'submissionId'=>$row['remote_id'],
-                            'csrf_token'=>$this->csrf[$handle],
+                            'csrf_token'=>$this->csrf[$row['jid']],
                         ],
                         'oj' => 'codeforces',
                         'ret' => true,
                         'returnHeader' => false,
-                        'handle' => $handle,
+                        'handle' => $this->handles[$row['jid']],
                     ]);
                     $sub['compile_info']=json_decode($res);
                 }
@@ -76,27 +84,24 @@ class Judger extends Curl
                 $sub['memory']=$cf[1];
                 $sub['remote_id']=$cf[3];
 
-                $ret[$row['sid']]=[
-                    "verdict"=>$sub['verdict']
-                ];
+                // $ret[$row['sid']]=[
+                //     "verdict"=>$sub['verdict']
+                // ];
 
                 $this->submissionModel->updateSubmission($row['sid'], $sub);
             }
         }
     }
 
-    private function get_last_codeforces($num)
+    private function get_last_codeforces($num, $handle)
     {
         $ret=array();
         if ($num==0) {
             return $ret;
         }
 
-        $judger_list=$this->judgerModel->list(2);
-        $judgerName=$judger_list[array_rand($judger_list)]['handle'];
-
         $ch=curl_init();
-        $url="http://codeforces.com/api/user.status?handle={$judgerName}&from=1&count={$num}";
+        $url="http://codeforces.com/api/user.status?handle={$handle}&from=1&count={$num}";
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response=curl_exec($ch);
