@@ -22,14 +22,14 @@ class Judger extends Curl
         "PRESENTATION_ERROR"=>"Presentation Error",
         "IDLENESS_LIMIT_EXCEEDED"=>"Idleness Limit Exceed"
     ];
-    private $list=[];
-    private $csrf=[];
-    private $handles=[];
+    private $list = [];
+    private $csrf = [];
+    private $handles = [];
 
     public function __construct()
     {
-        $this->submissionModel=new SubmissionModel();
-        $this->judgerModel=new JudgerModel();
+        $this->submissionModel = new SubmissionModel();
+        $this->judgerModel = new JudgerModel();
         $this->oid=OJModel::oid('codeforces');
 
         if(is_null($this->oid)) {
@@ -40,9 +40,9 @@ class Judger extends Curl
     public function judge($row)
     {
         $cf=[];
-        if (!isset($handles[$row['jid']])) {
+        if (!isset($this->handles[$row['jid']])) {
             $handle = $this->judgerModel->detail($row['jid'])['handle'];
-            $handles[$row['jid']] = $handle;
+            $this->handles[$row['jid']] = $handle;
             $res=$this->grab_page([
                 'site' => 'http://codeforces.com',
                 'oj' => 'codeforces',
