@@ -55,7 +55,7 @@ class Crawler extends CrawlerBase
         $content=$this->getUrl($url);
         $content_type=get_headers($url, 1)["Content-Type"];
         if (stripos($content, "<title>Codeforces</title>")===false) {
-            if (strpos($content, 'Statement is not available on English language' !== false)) {
+            if (strpos($content, 'Statement is not available on English language') !== false) {
                 $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Statement is not available on English.</>\n");
                 return false;
             }
