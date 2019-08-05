@@ -5,7 +5,7 @@ use App\Babel\Submit\Curl;
 use App\Models\CompilerModel;
 use App\Models\JudgerModel;
 use App\Models\OJModel;
-use App\Models\SubmissionModel;
+use App\Models\Submission\SubmissionModel;
 use Illuminate\Support\Facades\Validator;
 use Requests;
 
