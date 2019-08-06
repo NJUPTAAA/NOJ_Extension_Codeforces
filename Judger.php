@@ -44,7 +44,7 @@ class Judger extends Curl
             $handle = $this->judgerModel->detail($row['jid'])['handle'];
             $this->handles[$row['jid']] = $handle;
             $res=$this->grab_page([
-                'site' => 'http://codeforces.com',
+                'site' => 'https://codeforces.com',
                 'oj' => 'codeforces',
                 'handle' => $handle,
             ]);
@@ -67,7 +67,7 @@ class Judger extends Curl
                 $sub['verdict']=$this->verdict[$cf[2]];
                 if ($sub['verdict']=='Compile Error') {
                     $res=$this->post_data([
-                        'site' => 'http://codeforces.com/data/judgeProtocol',
+                        'site' => 'https://codeforces.com/data/judgeProtocol',
                         'data' => [
                             'submissionId'=>$row['remote_id'],
                             'csrf_token'=>$this->csrf[$row['jid']],
@@ -95,17 +95,21 @@ class Judger extends Curl
 
     private function get_last_codeforces($num, $handle)
     {
+        \Log::debug('num:'.$num);
         $ret=array();
         if ($num==0) {
             return $ret;
         }
 
         $ch=curl_init();
-        $url="http://codeforces.com/api/user.status?handle={$handle}&from=1&count={$num}";
+        $url="https://codeforces.com/api/user.status?handle={$handle}&from=1&count={$num}";
+        curl_setopt($ch, CURLOPT_CAINFO, babel_path("Cookies/cacert.pem"));
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response=curl_exec($ch);
+        \Log::debug('curl error:' . curl_error($ch));
         curl_close($ch);
+        \Log::debug('res:' . $response);
         $result=json_decode($response, true);
         if ($result["status"]=="OK") {
             for ($i=0; $i<$num; $i++) {

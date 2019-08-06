@@ -115,10 +115,10 @@ class Crawler extends CrawlerBase
                         $this->pro["source"]=trim(strip_tags($matches[1]));
                     }
 
-                    $this->pro["description"]=str_replace("src=\"", "src=\"http://codeforces.com/", $this->pro["description"]);
-                    $this->pro["input"]=str_replace("src=\"", "src=\"http://codeforces.com/", $this->pro["input"]);
-                    $this->pro["output"]=str_replace("src=\"", "src=\"http://codeforces.com/", $this->pro["output"]);
-                    $this->pro["note"]=str_replace("src=\"", "src=\"http://codeforces.com/", $this->pro["note"]);
+                    $this->pro["description"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["description"]);
+                    $this->pro["input"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["input"]);
+                    $this->pro["output"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["output"]);
+                    $this->pro["note"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["note"]);
                 } else {
                     if (stripos($content_type, "application/pdf")!==false) {
                         $ext="pdf";
@@ -155,7 +155,7 @@ class Crawler extends CrawlerBase
             $response=file_get_contents(__DIR__."/problemset.problems");
         } else {
             $ch=curl_init();
-            $url="http://codeforces.com/api/problemset.problems";
+            $url="https://codeforces.com/api/problemset.problems";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response=curl_exec($ch);
@@ -191,7 +191,7 @@ class Crawler extends CrawlerBase
 
             $this->line("<fg=yellow>{$updmsg}:   </>$pcode");
 
-            $this->pro['origin']="http://codeforces.com/contest/{$result['result']['problems'][$i]['contestId']}/problem/{$result['result']['problems'][$i]['index']}";
+            $this->pro['origin']="https://codeforces.com/contest/{$result['result']['problems'][$i]['contestId']}/problem/{$result['result']['problems'][$i]['index']}";
             $this->pro['title']=str_replace('"', "'", $result['result']['problems'][$i]['name']);
             $this->pro['solved_count']=$result['result']['problemStatistics'][$i]['solvedCount'];
             $this->pro['pcode']=$pcode;

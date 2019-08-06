@@ -32,13 +32,13 @@ class Submitter extends Curl
     private function _login()
     {
         $response=$this->grab_page([
-            'site' => 'http://codeforces.com',
+            'site' => 'https://codeforces.com',
             'oj' => 'codeforces',
             'handle' => $this->selectedJudger["handle"],
         ]);
         if (!(strpos($response, 'Logout')!==false)) {
             $response=$this->grab_page([
-                'site' => 'http://codeforces.com/enter',
+                'site' => 'https://codeforces.com/enter',
                 'oj' => 'codeforces',
                 'handle' => $this->selectedJudger["handle"],
             ]);
@@ -56,7 +56,7 @@ class Submitter extends Curl
                 'remember' => true,
             ];
             $this->login([
-                'url' => 'http://codeforces.com/enter',
+                'url' => 'https://codeforces.com/enter',
                 'data' => http_build_query($params),
                 'oj' => 'codeforces',
                 'handle' => $this->selectedJudger["handle"],
@@ -85,7 +85,7 @@ class Submitter extends Curl
 
 
         $response=$this->grab_page([
-            'site' => "codeforces.com/contest/{$this->post_data['cid']}/submit",
+            'site' => "https://codeforces.com/contest/{$this->post_data['cid']}/submit",
             'oj' => "codeforces",
             'handle' => $this->selectedJudger["handle"],
         ]);
@@ -105,7 +105,7 @@ class Submitter extends Curl
             'sourceFile' => '',
         ];
         $response=$this->post_data([
-            'site' => "codeforces.com/contest/{$this->post_data['cid']}/submit?csrf_token=".$token,
+            'site' => "https://codeforces.com/contest/{$this->post_data['cid']}/submit?csrf_token=".$token,
             'data' => http_build_query($params),
             'oj' => "codeforces",
             'ret' => true,
@@ -125,7 +125,7 @@ class Submitter extends Curl
                 $this->sub['verdict']="Submission Error";
             } else {
                 $this->sub['compile_info']=explode("</span>", $exploded[1])[0];
-                $this->sub['verdict']="Submission Error";
+                $this->sub['verdict']="Compile Error";
             }
         } else {
             preg_match('/submissionId="(\d+)"/', $response, $match);
