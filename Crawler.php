@@ -77,7 +77,7 @@ class Crawler extends CrawlerBase
                     if (preg_match("/memory limit per test<\\/div>(.*) megabyte/sU", $content, $matches)) {
                         $this->pro["memory_limit"]=intval(trim($matches[1])) * 1024;
                     }
-                    if (preg_match("/output<\\/div>.*<div>(<p>.*)<\\/div>/sU", $content, $matches)) {
+                    if (preg_match("/output<\\/div>.*<div>(.*)<\\/div>/sU", $content, $matches)) {
                         $this->pro["description"].=trim(($matches[1]));
                     }
                     if (preg_match("/Input<\\/div>(.*)<\\/div>/sU", $content, $matches)) {
@@ -95,7 +95,7 @@ class Crawler extends CrawlerBase
                             $temp_sample=explode('<div class="note">', $temp_sample)[0];
                         }
 
-                        $sample_list=HtmlDomParser::str_get_html($temp_sample);
+                        $sample_list=HtmlDomParser::str_get_html($temp_sample, true, true, DEFAULT_TARGET_CHARSET, false);
                         $sample_pairs=intval(count($sample_list->find('pre')) / 2);
                         $this->pro["sample"]=[];
                         for ($i=0; $i<$sample_pairs; $i++) {
