@@ -64,6 +64,7 @@ class Crawler extends CrawlerBase
             } else {
                 if (stripos($content_type, "text/html")!==false) {
                     $this->pro["file"]=0;
+                    $this->pro["file_url"]='';
                     $first_step=explode('<div class="input-file"><div class="property-title">input</div>', $content);
                     $second_step=explode("</div>", $first_step[1]);
                     $this->pro["input_type"]=$second_step[0];
@@ -132,11 +133,12 @@ class Crawler extends CrawlerBase
                         mkdir($dir, 0755, true);
                     }
                     file_put_contents(base_path("public/external/gym/$cid$num.$ext"), $content);
-                    $this->pro["description"].="<a href=\"/external/gym/$cid$num.$ext\">[Attachment Link]</a>";
+                    $this->pro["description"]='';
                     $this->pro["time_limit"]=0;
                     $this->pro["memory_limit"]=0;
                     $this->pro["source"]="Here";
                     $this->pro["file"]=1;
+                    $this->pro["file_url"]="/external/gym/$cid$num.$ext";
                     $this->pro["sample"]=[];
                 }
             }
