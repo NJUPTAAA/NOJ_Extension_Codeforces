@@ -8,6 +8,9 @@
     "repository":"https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
     "version":"0.1.8",
     "website":"https://codeforces.com/",
+    "custom":{
+        "css":"resources/custom.css"
+    },
     "provider":{
         "judger":"Judger",
         "crawler":"Crawler",
