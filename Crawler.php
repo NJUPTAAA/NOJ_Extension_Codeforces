@@ -79,13 +79,13 @@ class Crawler extends CrawlerBase
                         $this->pro["memory_limit"]=intval(trim($matches[1])) * 1024;
                     }
                     if (preg_match("/output<\\/div>.*<div>(.*)<\\/div>/sU", $content, $matches)) {
-                        $this->pro["description"].=trim(($matches[1]));
+                        $this->pro["description"].=str_replace('$$$$$$', '$$', trim(($matches[1])));
                     }
                     if (preg_match("/Input<\\/div>(.*)<\\/div>/sU", $content, $matches)) {
-                        $this->pro["input"]=trim($matches[1]);
+                        $this->pro["input"]=str_replace('$$$$$$', '$$', trim($matches[1]));
                     }
                     if (preg_match("/Output<\\/div>(.*)<\\/div>/sU", $content, $matches)) {
-                        $this->pro["output"]=trim($matches[1]);
+                        $this->pro["output"]=str_replace('$$$$$$', '$$', trim($matches[1]));
                     }
 
                     if (strpos($content, '<div class="sample-test">')!==false) {
