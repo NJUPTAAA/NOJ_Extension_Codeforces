@@ -160,6 +160,7 @@ class Crawler extends CrawlerBase
             $url="https://codeforces.com/api/problemset.problems";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CAINFO, babel_path("Cookies/cacert.pem"));
             $response=curl_exec($ch);
             curl_close($ch);
             // cache to folder
