@@ -1,0 +1,79 @@
+{
+    "modifications":[{
+        "code":"61GNU G++17 9.2.0 (64 bit, msys 2)",
+        "compability":"c",
+        "language":"cpp",
+        "icon":"devicon-cplusplus-plain",
+        "display":"GNU G++17 9.2.0 (64 bit, msys 2)",
+        "method":"add"
+    },{
+        "code":"65C# 8, .NET Core 3.1",
+        "compability":"chsarp",
+        "language":"chsarp",
+        "icon":"devicon-csharp-plain",
+        "display":"C# 8, .NET Core 3.1",
+        "method":"add"
+    },{
+        "code":"09C# Mono 5.18",
+        "new_code":"09C# Mono 6.8",
+        "display":"C# Mono 6.8",
+        "method":"modify"
+    },{
+        "code":"28D DMD32 v2.083.1",
+        "new_code":"28D DMD32 v2.091.0",
+        "display":"D DMD32 v2.091.0",
+        "method":"modify"
+    },{
+        "code":"32Go 1.11.4",
+        "new_code":"32Go 1.15.2",
+        "display":"Go 1.15.2",
+        "method":"modify"
+    },{
+        "code":"12Haskell GHC 7.8.3 (2014.2.0.0)",
+        "new_code":"12Haskell GHC 8.10.1",
+        "display":"Haskell GHC 8.10.1",
+        "method":"modify"
+    },{
+        "code":"60Java 11.0.6",
+        "compability":"java",
+        "language":"java",
+        "icon":"devicon-java-plain",
+        "display":"Java 11.0.6",
+        "method":"add"
+    },{
+        "code":"36Java 1.8.0_162",
+        "new_code":"36Java 1.8.0_241",
+        "display":"Java 1.8.0_241",
+        "method":"modify"
+    },{
+        "code":"48Kotlin 1.3.10",
+        "new_code":"48Kotlin 1.4.0",
+        "display":"Kotlin 1.4.0",
+        "method":"modify"
+    },{
+        "code":"40PyPy 2.7 (6.0.0)",
+        "new_code":"40PyPy 2.7 (7.2.0)",
+        "display":"PyPy 2.7 (7.2.0)",
+        "method":"modify"
+    },{
+        "code":"41PyPy 3.5 (6.0.0)",
+        "new_code":"41PyPy 3.6 (7.2.0)",
+        "display":"PyPy 3.6 (7.2.0)",
+        "method":"modify"
+    },{
+        "code":"08Ruby 2.0.0p645",
+        "new_code":"08Ruby 2.7.1",
+        "display":"Ruby 2.7.1",
+        "method":"modify"
+    },{
+        "code":"49Rust 1.31.1",
+        "new_code":"49Rust 1.42.0",
+        "display":"Rust 1.42.0",
+        "method":"modify"
+    },{
+        "code":"55Node.js 9.4.0",
+        "new_code":"55Node.js 12.6.3",
+        "display":"Node.js 12.6.3",
+        "method":"modify"
+    }]
+}
