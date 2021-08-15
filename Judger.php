@@ -95,7 +95,7 @@ class Judger extends Curl
 
     private function get_last_codeforces($num, $handle)
     {
-        \Log::debug('num:'.$num);
+        // \Log::debug('num:'.$num);
         $ret=array();
         if ($num==0) {
             return $ret;
@@ -107,9 +107,9 @@ class Judger extends Curl
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response=curl_exec($ch);
-        \Log::debug('curl error:' . curl_error($ch));
+        // \Log::debug('curl error:' . curl_error($ch));
         curl_close($ch);
-        \Log::debug('res:' . $response);
+        // \Log::debug('res:' . $response);
         $result=json_decode($response, true);
         if ($result["status"]=="OK") {
             for ($i=0; $i<$num; $i++) {
