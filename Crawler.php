@@ -52,6 +52,8 @@ class Crawler extends CrawlerBase
     public function extractCodeForces($cid, $num, $url, $default_desc="")
     {
         $pid=$cid.$num;
+        $this->con = $pid;
+        $this->imgi = 1;
         $content=$this->getUrl($url);
         $content_type=get_headers($url, 1)["Content-Type"];
         if (stripos($content, "<title>Codeforces</title>")===false) {
@@ -116,10 +118,10 @@ class Crawler extends CrawlerBase
                         $this->pro["source"]=trim(strip_tags($matches[1]));
                     }
 
-                    $this->pro["description"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["description"]);
-                    $this->pro["input"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["input"]);
-                    $this->pro["output"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["output"]);
-                    $this->pro["note"]=str_replace("src=\"", "src=\"https://codeforces.com/", $this->pro["note"]);
+                    $this->pro["description"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["description"], true, true, DEFAULT_TARGET_CHARSET, false));
+                    $this->pro["input"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["input"], true, true, DEFAULT_TARGET_CHARSET, false));
+                    $this->pro["output"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["output"], true, true, DEFAULT_TARGET_CHARSET, false));
+                    $this->pro["note"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["note"], true, true, DEFAULT_TARGET_CHARSET, false));
                 } else {
                     if (stripos($content_type, "application/pdf")!==false) {
                         $ext="pdf";
@@ -147,6 +149,41 @@ class Crawler extends CrawlerBase
             return false;
         }
         return true;
+    }
+
+    private function cacheImage($dom)
+    {
+        if(!$dom) return $dom;
+        foreach ($dom->find('img') as $ele) {
+            $src = $ele->src;
+            if (strpos($src, '://') !== false) {
+                $url=$src;
+            } elseif ($src[0]=='/') {
+                $url='https://codeforces.com'.$src;
+            } else {
+                $url='https://codeforces.com/'.$src;
+            }
+            $res=Requests::get($url, ['Referer' => 'https://codeforces.com']);
+            $ext=['image/jpeg'=>'.jpg', 'image/png'=>'.png', 'image/gif'=>'.gif', 'image/bmp'=>'.bmp'];
+            if (isset($res->headers['content-type'])) {
+                $cext=$ext[$res->headers['content-type']];
+            } else {
+                $pos=strpos($ele->src, '.');
+                if ($pos===false) {
+                    $cext='';
+                } else {
+                    $cext=substr($ele->src, $pos);
+                }
+            }
+            $fn=$this->con.'_'.($this->imgi++).$cext;
+            $dir=base_path("public/external/codeforces/img");
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+            file_put_contents(base_path("public/external/codeforces/img/$fn"), $res->body);
+            $ele->src='/external/codeforces/img/'.$fn;
+        }
+        return $dom;
     }
 
     public function crawl($con, $cached, $incremental)
