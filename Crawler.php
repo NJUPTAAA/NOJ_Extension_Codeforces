@@ -134,6 +134,7 @@ class Crawler extends CrawlerBase
 
                     if (preg_match("/Note<\\/div>(.*)<\\/div><\\/div>/sU", $content, $matches)) {
                         $this->pro["note"]=trim(($matches[1]));
+                        $this->pro["note"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["note"], true, true, DEFAULT_TARGET_CHARSET, false));
                     }
                     if (preg_match("/<th class=\"left\" style=\"width:100%;\">(.*)<\\/th>/sU", $content, $matches)) {
                         $this->pro["source"]=trim(strip_tags($matches[1]));
@@ -142,7 +143,6 @@ class Crawler extends CrawlerBase
                     $this->pro["description"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["description"], true, true, DEFAULT_TARGET_CHARSET, false));
                     $this->pro["input"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["input"], true, true, DEFAULT_TARGET_CHARSET, false));
                     $this->pro["output"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["output"], true, true, DEFAULT_TARGET_CHARSET, false));
-                    $this->pro["note"]=$this->cacheImage(HtmlDomParser::str_get_html($this->pro["note"], true, true, DEFAULT_TARGET_CHARSET, false));
                 } else {
                     if (stripos($content_type, "application/pdf")!==false) {
                         $ext="pdf";
