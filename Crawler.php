@@ -21,9 +21,10 @@ class Crawler extends CrawlerBase
      */
     public function start($conf)
     {
-        $action=isset($conf["action"])?$conf["action"]:'crawl_problem';
-        $con=isset($conf["con"])?$conf["con"]:'all';
-        $cached=isset($conf["cached"])?$conf["cached"]:false;
+        $action=$conf["action"];
+        $con=$conf["con"];
+        $cached=$conf["cached"];
+        $range=$conf["range"];
         $this->oid=OJModel::oid('codeforces');
 
         if(is_null($this->oid)) {
@@ -33,7 +34,7 @@ class Crawler extends CrawlerBase
         if ($action=='judge_level') {
             $this->judge_level();
         } else {
-            $this->crawl($con, $cached, $action == 'update_problem');
+            $this->crawl($con, $cached, $action == 'update_problem', $range);
         }
     }
 
@@ -186,7 +187,7 @@ class Crawler extends CrawlerBase
         return $dom;
     }
 
-    public function crawl($con, $cached, $incremental)
+    public function crawl($con, $cached, $incremental, $range)
     {
         $problemModel=new ProblemModel();
         $start=time();
@@ -221,6 +222,8 @@ class Crawler extends CrawlerBase
                 if ($con!=$result['result']['problems'][$i]['contestId']) {
                     continue;
                 }
+            } elseif ($this->inRange($result['result']['problems'][$i]['contestId'], $range)===false) {
+                continue;
             }
 
             $pcode = "CF".$result['result']['problems'][$i]['contestId'].$result['result']['problems'][$i]['index'];
@@ -263,5 +266,19 @@ class Crawler extends CrawlerBase
 
             $this->line("<fg=green>$donemsg:    </>$pcode");
         }
+    }
+
+    private function inRange($needle, $haystack)
+    {
+        $options=[];
+        if(!is_null($haystack[0])) {
+            $options['min_range']=$haystack[0];
+        }
+        if(!is_null($haystack[1])) {
+            $options['max_range']=$haystack[1];
+        }
+        return filter_var($needle, FILTER_VALIDATE_INT, [
+            'options' => $options
+        ]);
     }
 }
