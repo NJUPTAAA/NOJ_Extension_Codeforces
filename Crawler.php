@@ -50,7 +50,27 @@ class Crawler extends CrawlerBase
         }
     }
 
-    public function extractCodeForces($cid, $num, $url, $default_desc="")
+    public function extractCodeForces($cid, $num, $url, $default_desc="", $retries=5)
+    {
+        $attempts=1;
+        $ret=false;
+        while($attempts <= $retries){
+            try{
+                $ret=$this->_extractCodeForces($cid, $num, $url, $default_desc);
+            }catch(Exception $e){
+                $attempts++;
+                $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>{$e->getMessage()}</>\n");
+                continue;
+            }
+            break;
+        }
+        if($attempts==6){
+            throw new Exception("Failed After Multiple Tries");
+        }
+        return $ret;
+    }
+
+    private function _extractCodeForces($cid, $num, $url, $default_desc)
     {
         $pid=$cid.$num;
         $this->con = $pid;
