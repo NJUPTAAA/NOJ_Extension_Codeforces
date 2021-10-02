@@ -1,23 +1,23 @@
 {
-    "name":"Codeforces",
-    "code":"codeforces",
-    "icon":"resources/codeforces@2x.png",
-    "type":"virtual-judge",
+    "name": "Codeforces",
+    "code": "codeforces",
+    "icon": "resources/codeforces@2x.png",
+    "type": "virtual-judge",
     "description": "Codeforces interface for NOJ",
     "license": "MIT",
-    "repository":"https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
-    "version":"0.3.1",
-    "website":"https://codeforces.com/",
-    "custom":{
-        "css":"resources/custom.css"
+    "repository": "https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
+    "version": "0.3.1",
+    "website": "https://codeforces.com/",
+    "custom": {
+        "css": "resources/custom.css"
     },
-    "provider":{
-        "judger":"Judger",
-        "crawler":"Crawler",
-        "submitter":"Submitter",
-        "installer":"Installer"
+    "provider": {
+        "judger": "Judger",
+        "crawler": "Crawler",
+        "submitter": "Submitter",
+        "installer": "Installer"
     },
-    "require":{
-        "NOJ":"^0.16.0"
+    "require": {
+        "NOJ": "^0.16.0"
     }
 }
