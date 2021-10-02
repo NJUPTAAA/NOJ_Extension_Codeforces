@@ -1,0 +1,53 @@
+{
+    "modifications":[
+        {
+            "code":"42",
+            "method":"remove"
+        },
+        {
+            "code":"2",
+            "method":"remove"
+        },
+        {
+            "code":"32",
+            "display":"Go 1.15.6",
+            "method":"modify"
+        },
+        {
+            "code":"48",
+            "display":"Kotlin 1.5.31",
+            "method":"modify"
+        },
+        {
+            "code":"7",
+            "display":"Python 2.7.18",
+            "method":"modify"
+        },
+        {
+            "code":"31",
+            "display":"Python 3.8.10",
+            "method":"modify"
+        },
+        {
+            "code":"40",
+            "display":"PyPy 2.7 (7.3.0)",
+            "method":"modify"
+        },
+        {
+            "code":"41",
+            "display":"PyPy 3.7 (7.3.0)",
+            "method":"modify"
+        },
+        {
+            "code":"49",
+            "display":"Rust 1.49.0",
+            "method":"modify"
+        },
+        {
+            "code":"8",
+            "new_code":"67",
+            "display":"Ruby 3.0.0",
+            "method":"modify"
+        }
+    ]
+}

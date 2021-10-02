@@ -1,0 +1,54 @@
+{
+    "modifications":[
+        {
+            "code": "28",
+            "icon": "langicon-dlang",
+            "method":"modify"
+        },
+        {
+            "code": "12",
+            "icon": "devicon-haskell-plain",
+            "method":"modify"
+        },
+        {
+            "code": "48",
+            "icon": "devicon-kotlin-plain",
+            "method":"modify"
+        },
+        {
+            "code": "19",
+            "icon": "devicon-ocaml-plain",
+            "method":"modify"
+        },
+        {
+            "code": "3",
+            "icon": "langicon-delphi",
+            "method":"modify"
+        },
+        {
+            "code": "4",
+            "icon": "langicon-delphi",
+            "method":"modify"
+        },
+        {
+            "code": "51",
+            "icon": "langicon-delphi",
+            "method":"modify"
+        },
+        {
+            "code": "13",
+            "icon": "devicon-perl-plain",
+            "method":"modify"
+        },
+        {
+            "code": "49",
+            "icon": "devicon-rust-plain",
+            "method":"modify"
+        },
+        {
+            "code": "20",
+            "icon": "devicon-scala-plain",
+            "method":"modify"
+        }
+    ]
+}

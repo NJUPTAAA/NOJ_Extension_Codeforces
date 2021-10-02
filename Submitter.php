@@ -66,8 +66,6 @@ class Submitter extends Curl
 
     private function _submit()
     {
-        // $this->sub['language']=substr($this->post_data["lang"], 2, 50);
-
         $submissionModel=new SubmissionModel();
         $s_num=$submissionModel->countSolution($this->post_data["solution"]);
         $space='';
@@ -76,12 +74,8 @@ class Submitter extends Curl
         }
         $contestId=$this->post_data["cid"];
         $submittedProblemIndex=$this->post_data["iid"];
-        $var=substr($this->post_data["lang"], 0, 2);
-        $programTypeId=$var;
-        if ($var[0]==0) {
-            $programTypeId=$var[1];
-        }
-        $source=($space.chr(10).$this->post_data["solution"]);
+        $programTypeId=$this->post_data["lang"];
+        $source=($this->post_data["solution"].$space.chr(10));
 
 
         $response=$this->grab_page([

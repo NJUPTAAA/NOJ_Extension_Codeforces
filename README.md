@@ -7,7 +7,9 @@ Judge Agent should be a valid CodeForces account.
 
 We highly recommend **5~10 Judge Agents** enabled for CodeForces NOJ Babel Extension.
 
-Set handle the handle and password the password from CodeForces.
+Set username the handle and password the password from CodeForces.
+
+**Setting email as handle will break some features like `babel:judge`.**
 
 # Usage
 

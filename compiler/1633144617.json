@@ -1,0 +1,128 @@
+{
+    "modifications": [
+        {
+            "code": "43GNU GCC C11 5.1.0",
+            "new_code": "43"
+        },
+        {
+            "code": "52Clang++17 Diagnostics",
+            "new_code": "52"
+        },
+        {
+            "code": "42GNU G++11 5.1.0",
+            "new_code": "42"
+        },
+        {
+            "code": "50GNU G++14 6.4.0",
+            "new_code": "50"
+        },
+        {
+            "code": "54GNU G++17 7.3.0",
+            "new_code": "54"
+        },
+        {
+            "code": "02Microsoft Visual C++ 2010",
+            "new_code": "2"
+        },
+        {
+            "code": "59Microsoft Visual C++ 2017",
+            "new_code": "59"
+        },
+        {
+            "code": "09C# Mono 6.8",
+            "new_code": "9"
+        },
+        {
+            "code": "28D DMD32 v2.091.0",
+            "new_code": "28"
+        },
+        {
+            "code": "32Go 1.15.2",
+            "new_code": "32"
+        },
+        {
+            "code": "12Haskell GHC 8.10.1",
+            "new_code": "12"
+        },
+        {
+            "code": "36Java 1.8.0_241",
+            "new_code": "36"
+        },
+        {
+            "code": "48Kotlin 1.4.0",
+            "new_code": "48"
+        },
+        {
+            "code": "19OCaml 4.02.1",
+            "new_code": "19"
+        },
+        {
+            "code": "03Delphi 7",
+            "new_code": "3"
+        },
+        {
+            "code": "04Free Pascal 3.0.2",
+            "new_code": "4"
+        },
+        {
+            "code": "51PascalABC.NET 3.4.2",
+            "new_code": "51"
+        },
+        {
+            "code": "13Perl 5.20.1",
+            "new_code": "13"
+        },
+        {
+            "code": "06PHP 7.2.13",
+            "new_code": "6"
+        },
+        {
+            "code": "07Python 2.7.15",
+            "new_code": "7"
+        },
+        {
+            "code": "31Python 3.7.2",
+            "new_code": "31"
+        },
+        {
+            "code": "40PyPy 2.7 (7.2.0)",
+            "new_code": "40"
+        },
+        {
+            "code": "41PyPy 3.6 (7.2.0)",
+            "new_code": "41"
+        },
+        {
+            "code": "08Ruby 2.7.1",
+            "new_code": "8"
+        },
+        {
+            "code": "49Rust 1.42.0",
+            "new_code": "49"
+        },
+        {
+            "code": "20Scala 2.12.8",
+            "new_code": "20"
+        },
+        {
+            "code": "34JavaScript V8 4.8.0",
+            "new_code": "34"
+        },
+        {
+            "code": "55Node.js 12.6.3",
+            "new_code": "55"
+        },
+        {
+            "code": "61GNU G++17 9.2.0 (64 bit, msys 2)",
+            "new_code": "61"
+        },
+        {
+            "code": "65C# 8, .NET Core 3.1",
+            "new_code": "65"
+        },
+        {
+            "code": "60Java 11.0.6",
+            "new_code": "60"
+        }
+    ]
+}
