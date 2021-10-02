@@ -6,7 +6,7 @@
     "description": "Codeforces interface for NOJ",
     "license": "MIT",
     "repository":"https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
-    "version":"0.3.0",
+    "version":"0.3.1",
     "website":"https://codeforces.com/",
     "custom":{
         "css":"resources/custom.css"

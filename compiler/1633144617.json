@@ -2,127 +2,158 @@
     "modifications": [
         {
             "code": "43GNU GCC C11 5.1.0",
-            "new_code": "43"
+            "new_code": "43",
+            "method":"modify"
         },
         {
             "code": "52Clang++17 Diagnostics",
-            "new_code": "52"
+            "new_code": "52",
+            "method":"modify"
         },
         {
             "code": "42GNU G++11 5.1.0",
-            "new_code": "42"
+            "new_code": "42",
+            "method":"modify"
         },
         {
             "code": "50GNU G++14 6.4.0",
-            "new_code": "50"
+            "new_code": "50",
+            "method":"modify"
         },
         {
             "code": "54GNU G++17 7.3.0",
-            "new_code": "54"
+            "new_code": "54",
+            "method":"modify"
         },
         {
             "code": "02Microsoft Visual C++ 2010",
-            "new_code": "2"
+            "new_code": "2",
+            "method":"modify"
         },
         {
             "code": "59Microsoft Visual C++ 2017",
-            "new_code": "59"
+            "new_code": "59",
+            "method":"modify"
         },
         {
             "code": "09C# Mono 6.8",
-            "new_code": "9"
+            "new_code": "9",
+            "method":"modify"
         },
         {
             "code": "28D DMD32 v2.091.0",
-            "new_code": "28"
+            "new_code": "28",
+            "method":"modify"
         },
         {
             "code": "32Go 1.15.2",
-            "new_code": "32"
+            "new_code": "32",
+            "method":"modify"
         },
         {
             "code": "12Haskell GHC 8.10.1",
-            "new_code": "12"
+            "new_code": "12",
+            "method":"modify"
         },
         {
             "code": "36Java 1.8.0_241",
-            "new_code": "36"
+            "new_code": "36",
+            "method":"modify"
         },
         {
             "code": "48Kotlin 1.4.0",
-            "new_code": "48"
+            "new_code": "48",
+            "method":"modify"
         },
         {
             "code": "19OCaml 4.02.1",
-            "new_code": "19"
+            "new_code": "19",
+            "method":"modify"
         },
         {
             "code": "03Delphi 7",
-            "new_code": "3"
+            "new_code": "3",
+            "method":"modify"
         },
         {
             "code": "04Free Pascal 3.0.2",
-            "new_code": "4"
+            "new_code": "4",
+            "method":"modify"
         },
         {
             "code": "51PascalABC.NET 3.4.2",
-            "new_code": "51"
+            "new_code": "51",
+            "method":"modify"
         },
         {
             "code": "13Perl 5.20.1",
-            "new_code": "13"
+            "new_code": "13",
+            "method":"modify"
         },
         {
             "code": "06PHP 7.2.13",
-            "new_code": "6"
+            "new_code": "6",
+            "method":"modify"
         },
         {
             "code": "07Python 2.7.15",
-            "new_code": "7"
+            "new_code": "7",
+            "method":"modify"
         },
         {
             "code": "31Python 3.7.2",
-            "new_code": "31"
+            "new_code": "31",
+            "method":"modify"
         },
         {
             "code": "40PyPy 2.7 (7.2.0)",
-            "new_code": "40"
+            "new_code": "40",
+            "method":"modify"
         },
         {
             "code": "41PyPy 3.6 (7.2.0)",
-            "new_code": "41"
+            "new_code": "41",
+            "method":"modify"
         },
         {
             "code": "08Ruby 2.7.1",
-            "new_code": "8"
+            "new_code": "8",
+            "method":"modify"
         },
         {
             "code": "49Rust 1.42.0",
-            "new_code": "49"
+            "new_code": "49",
+            "method":"modify"
         },
         {
             "code": "20Scala 2.12.8",
-            "new_code": "20"
+            "new_code": "20",
+            "method":"modify"
         },
         {
             "code": "34JavaScript V8 4.8.0",
-            "new_code": "34"
+            "new_code": "34",
+            "method":"modify"
         },
         {
             "code": "55Node.js 12.6.3",
-            "new_code": "55"
+            "new_code": "55",
+            "method":"modify"
         },
         {
             "code": "61GNU G++17 9.2.0 (64 bit, msys 2)",
-            "new_code": "61"
+            "new_code": "61",
+            "method":"modify"
         },
         {
             "code": "65C# 8, .NET Core 3.1",
-            "new_code": "65"
+            "new_code": "65",
+            "method":"modify"
         },
         {
             "code": "60Java 11.0.6",
-            "new_code": "60"
+            "new_code": "60",
+            "method":"modify"
         }
     ]
 }
