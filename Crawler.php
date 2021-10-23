@@ -76,7 +76,11 @@ class Crawler extends CrawlerBase
         $this->con = $pid;
         $this->imgi = 1;
         $content = $this->getUrl($url);
-        $content_type = Requests::get($url)->headers['content-type'];
+        $content_type = Requests::get($url, [
+            'Referer' => 'https://codeforces.com'
+        ], [
+            'verify' => babel_path("Cookies/cacert.pem")
+        ])->headers['content-type'];
         if (stripos($content, "<title>Codeforces</title>")===false) {
             if (strpos($content, 'Statement is not available on English language') !== false) {
                 $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Statement is not available on English.</>\n");
@@ -184,7 +188,9 @@ class Crawler extends CrawlerBase
             } else {
                 $url='https://codeforces.com/'.$src;
             }
-            $res=Requests::get($url, ['Referer' => 'https://codeforces.com'], [
+            $res=Requests::get($url, [
+                'Referer' => 'https://codeforces.com'
+            ], [
                 'verify' => babel_path("Cookies/cacert.pem")
             ]);
             $ext=['image/jpeg'=>'.jpg', 'image/png'=>'.png', 'image/gif'=>'.gif', 'image/bmp'=>'.bmp'];
