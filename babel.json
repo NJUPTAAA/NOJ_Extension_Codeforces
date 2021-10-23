@@ -18,8 +18,7 @@
         "installer": "Installer"
     },
     "namespace": {
-        "codeforces": "CF*",
-        "gym": "GYM*"
+        "codeforces": "CF*"
     },
     "require": {
         "NOJ": "^0.18.0"
