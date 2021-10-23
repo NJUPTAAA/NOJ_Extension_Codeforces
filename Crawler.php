@@ -72,11 +72,11 @@ class Crawler extends CrawlerBase
 
     private function _extractCodeForces($cid, $num, $url, $default_desc)
     {
-        $pid=$cid.$num;
+        $pid = $cid.$num;
         $this->con = $pid;
         $this->imgi = 1;
-        $content=$this->getUrl($url);
-        $content_type=get_headers($url, 1)["Content-Type"];
+        $content = $this->getUrl($url);
+        $content_type = Requests::get($url)->headers['content-type'];
         if (stripos($content, "<title>Codeforces</title>")===false) {
             if (strpos($content, 'Statement is not available on English language') !== false) {
                 $this->line("\n  <bg=red;fg=white> Exception </> : <fg=yellow>Statement is not available on English.</>\n");
