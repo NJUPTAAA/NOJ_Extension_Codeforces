@@ -122,25 +122,27 @@ class Crawler extends CrawlerBase
             $this->pro["input_type"] = $problemDOM->find('div.problem-statement div.header .input-file', 0)->find('text', -1)->plaintext;
             $this->pro["output_type"] = $problemDOM->find('div.problem-statement div.header .output-file', 0)->find('text', -1)->plaintext;
 
-            $descriptionSpecificationDOM = $problemDOM->find('div.problem-statement', 0)->children(1);
-            $this->pro["description"] = trim($descriptionSpecificationDOM->innertext);
+            $problemDOM->find('div.problem-statement div.header', 0)->outertext = '';
 
             $inputSpecificationDOM = $problemDOM->find('div.problem-statement div.input-specification', 0);
             if (filled($inputSpecificationDOM)) {
                 $inputSpecificationDOM->find('div.section-title', 0)->outertext = '';
                 $this->pro["input"] = trim($inputSpecificationDOM->innertext);
+                $inputSpecificationDOM->outertext = '';
             }
 
             $outputSpecificationDOM = $problemDOM->find('div.problem-statement div.output-specification', 0);
             if (filled($outputSpecificationDOM)) {
                 $outputSpecificationDOM->find('div.section-title', 0)->outertext = '';
                 $this->pro["output"] = trim($outputSpecificationDOM->innertext);
+                $outputSpecificationDOM->outertext = '';
             }
 
             $noteDOM = $problemDOM->find('div.problem-statement div.note', 0);
             if(filled($noteDOM)) {
                 $noteDOM->find('div.section-title', 0)->outertext = '';
                 $this->pro["note"] = trim($noteDOM->innertext);
+                $noteDOM->outertext = '';
             }
 
             $sampleTestsDOM = $problemDOM->find('div.problem-statement div.sample-tests', 0);
@@ -158,7 +160,11 @@ class Crawler extends CrawlerBase
                     ]);
                 }
                 $this->pro["sample"] = $samples;
+                $sampleTestsDOM->outertext = '';
             }
+
+            $descriptionSpecificationDOM = $problemDOM->find('div.problem-statement', 0);
+            $this->pro["description"] = trim($descriptionSpecificationDOM->innertext);
 
             $this->pro["note"] = $this->cacheImage(HtmlDomParser::str_get_html($this->pro["note"], true, true, DEFAULT_TARGET_CHARSET, false));
             $this->pro["description"] = $this->cacheImage(HtmlDomParser::str_get_html($this->pro["description"], true, true, DEFAULT_TARGET_CHARSET, false));
