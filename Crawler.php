@@ -184,7 +184,9 @@ class Crawler extends CrawlerBase
             } else {
                 $url='https://codeforces.com/'.$src;
             }
-            $res=Requests::get($url, ['Referer' => 'https://codeforces.com']);
+            $res=Requests::get($url, ['Referer' => 'https://codeforces.com'], [
+                'verify' => babel_path("Cookies/cacert.pem")
+            ]);
             $ext=['image/jpeg'=>'.jpg', 'image/png'=>'.png', 'image/gif'=>'.gif', 'image/bmp'=>'.bmp'];
             if (isset($res->headers['content-type'])) {
                 $cext=$ext[$res->headers['content-type']];
