@@ -3,10 +3,10 @@
     "code": "codeforces",
     "icon": "resources/codeforces@2x.png",
     "type": "virtual-judge",
-    "description": "Codeforces interface for NOJ",
+    "description": "Codeforces & Gym interface for NOJ",
     "license": "MIT",
     "repository": "https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "website": "https://codeforces.com/",
     "custom": {
         "css": "resources/custom.css"
@@ -17,7 +17,11 @@
         "submitter": "Submitter",
         "installer": "Installer"
     },
+    "namespace": {
+        "codeforces": "CF*",
+        "gym": "GYM*"
+    },
     "require": {
-        "NOJ": "^0.16.0"
+        "NOJ": "^0.18.0"
     }
 }
