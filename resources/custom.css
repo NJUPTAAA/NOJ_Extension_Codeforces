@@ -1,3 +1,7 @@
+fresh-container img {
+    max-width: 100%;
+}
+
 fresh-container .tex-formula {
     font-family: times new roman,sans-serif;
     vertical-align: middle;
