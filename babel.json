@@ -21,6 +21,6 @@
         "codeforces": "CF*"
     },
     "require": {
-        "NOJ": "^0.18.0"
+        "NOJ": "^0.17.3"
     }
 }
