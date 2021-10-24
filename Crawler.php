@@ -85,6 +85,12 @@ class Crawler extends CrawlerBase
         $this->currentProblemCcode = $pcode;
         $this->imageIndex = 1;
 
+        $this->pro["input"] = null;
+        $this->pro["output"] = null;
+        $this->pro["note"] = null;
+        $this->pro["sample"] = null;
+        $this->pro["description"] = null;
+
         $response = $this->getCodeForcesResponse($url);
         $contentType = $response->headers['content-type'];
         $content = $response->body;
@@ -287,6 +293,9 @@ class Crawler extends CrawlerBase
 
             $this->pro['origin'] = "https://codeforces.com/contest/{$problem['contestId']}/problem/{$problem['index']}";
             $this->pro['title'] = str_replace('"', "'", $problem['name']);
+            if(blank($this->pro['title'])) {
+                $this->pro['title'] = $pcode;
+            }
             $this->pro['solved_count'] = $problemset['result']['problemStatistics'][$index]['solvedCount'];
             $this->pro['pcode'] = $pcode;
             $this->pro['index_id'] = $problem['index'];
