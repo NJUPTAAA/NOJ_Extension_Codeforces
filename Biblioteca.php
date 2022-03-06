@@ -36,7 +36,10 @@ class Biblioteca extends BibliotecaBase
             throw new Exception("Problem Not Found on Biblioteca");
         }
 
-        foreach (json_decode(file_get_contents($this->bibliotecaUrl . $this->bibliotecaNamespace . "/$pcode.min.json"), true) as $language => $dialect) {
+        foreach (json_decode(file_get_contents($this->bibliotecaUrl . $this->bibliotecaNamespace . "/$pcode.min.json"), true) as $language => $dialectInfo) {
+            if ($dialect != $language) {
+                continue;
+            }
             $action = 'Updat';
             $dialectInstance = ProblemDialect::where(['problem_id' => $pid, 'dialect_language' => $language, 'is_biblioteca' => true])->first();
             if (blank($dialectInstance)) {
@@ -49,8 +52,8 @@ class Biblioteca extends BibliotecaBase
             $dialectInstance->dialect_language = $language;
             $dialectInstance->is_biblioteca = true;
             foreach (['title', 'description', 'input', 'output', 'note'] as $fields) {
-                if (isset($dialect[$fields]) && filled($dialect[$fields])) {
-                    $dialectInstance->$fields = $dialect[$fields];
+                if (isset($dialectInfo[$fields]) && filled($dialectInfo[$fields])) {
+                    $dialectInstance->$fields = $dialectInfo[$fields];
                 } else {
                     $dialectInstance->$fields = null;
                 }
