@@ -6,7 +6,7 @@
     "description": "Codeforces & Gym interface for NOJ",
     "license": "MIT",
     "repository": "https://github.com/NJUPTAAA/NOJ_Extension_Codeforces",
-    "version": "0.4.3",
+    "version": "0.5.0",
     "website": "https://codeforces.com/",
     "custom": {
         "css": "resources/custom.css"
@@ -15,12 +15,13 @@
         "judger": "Judger",
         "crawler": "Crawler",
         "submitter": "Submitter",
-        "installer": "Installer"
+        "installer": "Installer",
+        "biblioteca": "Biblioteca"
     },
     "namespace": {
         "codeforces": "CF*"
     },
     "require": {
-        "NOJ": "^0.17.2"
+        "NOJ": "^0.18.0"
     }
 }
