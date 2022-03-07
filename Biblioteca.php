@@ -31,13 +31,13 @@ class Biblioteca extends BibliotecaBase
             throw new Exception("Problem Code Not Found");
         }
 
-        $catalog = json_decode(file_get_contents($this->bibliotecaUrl . $this->bibliotecaNamespace . '/catalog.min.json'), true);
+        $catalog = json_decode(file_get_contents("{$this->bibliotecaUrl}/{$this->bibliotecaNamespace}/catalog.min.json"), true);
         if (!isset($catalog[$pcode]) || blank($catalog[$pcode])) {
             throw new Exception("Problem Not Found on Biblioteca");
         }
 
-        foreach (json_decode(file_get_contents($this->bibliotecaUrl . $this->bibliotecaNamespace . "/$pcode.min.json"), true) as $language => $dialectInfo) {
-            if ($dialect != $language) {
+        foreach (json_decode(file_get_contents("{$this->bibliotecaUrl}/{$this->bibliotecaNamespace}/$pcode.min.json"), true) as $language => $dialectInfo) {
+            if ($dialect != 'all' && $dialect != $language) {
                 continue;
             }
             $action = 'Updat';
