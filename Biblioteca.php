@@ -58,7 +58,7 @@ class Biblioteca extends BibliotecaBase
                     $dialectInstance->$fields = null;
                 }
             }
-            $dialectInstance->copyright = "https://github.com/NJUPTAAA/Biblioteca";
+            $dialectInstance->copyright = "Biblioteca la Babel";
             $dialectInstance->save();
             $this->line("<fg=green>{$action}ed </> $language of $pcode");
         }
